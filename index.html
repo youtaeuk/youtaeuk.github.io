@@ -1,0 +1,1709 @@
+<!doctype html>
+<html lang="eng">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tae Uk You</title>
+
+  <!-- Font: Ubuntu Condensed -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#fbfbfd;
+      --text:#0f172a;
+      --muted:#475569;
+      --line:#e2e8f0;
+      --soft:#f8fafc;
+      --accent:#2563eb;
+      --shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
+      --radius: 14px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"Ubuntu Condensed", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      letter-spacing:.1px;
+    }
+    a{color:inherit}
+    a:hover{opacity:.9}
+
+    .app{display:grid; grid-template-columns:300px 1fr; min-height:100vh}
+
+    aside{
+      border-right:1px solid var(--line);
+      background:var(--panel);
+      padding:22px 16px;
+      position:sticky; top:0;
+      height:100vh; overflow:auto;
+    }
+    .brand{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:14px 14px 12px;
+      margin-bottom:14px;
+    }
+    .brand .title{
+      margin:0;
+      font-size:18px;
+      font-weight:800;
+      cursor:pointer;
+      user-select:none;
+      text-align: center;
+    }
+    .brand .sub{
+      margin:7px 0 0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.45;
+      text-align: center;
+    }
+    .nav-title{
+      font-size:11px;
+      color:var(--muted);
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin:16px 8px 8px;
+    }
+
+    .menu{display:flex; flex-direction:column; gap:8px;}
+    .menu-item{border:1px solid transparent; border-radius:12px; background:transparent}
+    .menu-btn{
+      width:100%;
+      text-align:left;
+      border:1px solid transparent;
+      background:transparent;
+      padding:10px 10px;
+      border-radius:12px;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      font-size:14px;
+    }
+    .menu-btn:hover{background:var(--soft); border-color:var(--line)}
+    .menu-btn .left{display:flex; flex-direction:column; gap:2px;}
+    .menu-btn small{color:var(--muted); font-size:12px;}
+    .chev{color:var(--muted); font-size:14px;}
+
+    .submenu{display:none; padding:6px 8px 10px; margin-top:2px;}
+    .menu-item.open .submenu{display:block;}
+    .subbtn{
+      width:100%;
+      text-align:left;
+      border:1px solid transparent;
+      background:#fff;
+      border-radius:10px;
+      padding:9px 10px;
+      margin-top:7px;
+      cursor:pointer;
+      font-size:13px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      box-shadow: 0 1px 0 rgba(15,23,42,.03);
+    }
+    .subbtn:hover{border-color:var(--line); background:var(--soft);}
+    .subbtn.active{border-color:rgba(37,99,235,.35); background:rgba(37,99,235,.06);}
+    .subbtn span{color:var(--muted); font-size:12px;}
+
+    main{padding:28px 36px;}
+    .container{max-width:980px;}
+
+    .kicker{
+      margin:0 0 10px;
+      color:var(--muted);
+      font-size:13px;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+    }
+    h1{margin:0 0 10px; font-size:30px; letter-spacing:-0.02em;}
+    h2{margin:0 0 8px; font-size:20px; letter-spacing:-0.01em;}
+    .lead{
+      margin:0 0 16px;
+      color:var(--muted);
+      line-height:1.7;
+      max-width:92ch;
+      font-size:15px;
+    }
+
+    .card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:16px;
+      margin:12px 0;
+    }
+    .meta{
+      font-size:12px;
+      font-weight:800;
+      color:var(--accent);
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:8px;
+    }
+    .kv{margin:0; color:var(--muted); line-height:1.75; font-size:14px;}
+    .kv b{color:var(--text)}
+    ul{margin:10px 0 0 18px; color:var(--muted); line-height:1.75; font-size:14px;}
+    .pill{
+      display:inline-block;
+      font-size:12px;
+      color:var(--muted);
+      border:1px solid var(--line);
+      background:var(--soft);
+      padding:4px 8px;
+      border-radius:999px;
+      margin:4px 6px 0 0;
+    }
+    .hr{height:1px; background:var(--line); margin:16px 0;}
+
+    /* Instagram-like square thumbnails */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+    }
+    .thumb{
+      position:relative;
+      width:100%;
+      aspect-ratio: 1 / 1;
+      border-radius:12px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      background:#fff;
+      cursor:pointer;
+    }
+    .thumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      transform: scale(1.01);
+      transition: transform .18s ease;
+    }
+    .thumb:hover img{transform: scale(1.06);}
+    .thumb::after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,.20));
+      opacity:0;
+      transition:opacity .18s ease;
+    }
+    .thumb:hover::after{opacity:1;}
+
+    /* Modal */
+    .modal{
+      position:fixed; inset:0;
+      background:rgba(0,0,0,.72);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      z-index:9999;
+    }
+    .modal.open{display:flex;}
+    .modal-card{
+      max-width:min(1100px, 96vw);
+      max-height: 92vh;
+      border-radius:16px;
+      overflow:hidden;
+      background:#0b1220;
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow: 0 30px 80px rgba(0,0,0,.35);
+      position:relative;
+    }
+    .modal-img{display:block; max-width:100%; max-height:92vh; width:auto; height:auto;}
+    .modal-close{
+      position:absolute; top:10px; right:10px;
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.18);
+      color:#fff;
+      border-radius:999px;
+      padding:8px 10px;
+      cursor:pointer;
+      font-size:13px;
+      backdrop-filter: blur(6px);
+    }
+    .modal-close:hover{background:rgba(255,255,255,.18);}
+
+    /* Foundational cards */
+    .found-grid{display:grid; grid-template-columns: repeat(2, 1fr); gap:12px;}
+    .fcard{border:1px solid var(--line); border-radius:14px; padding:14px; background:linear-gradient(180deg,#fff,#fbfcff);}
+    .fhead{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:8px;}
+    .ftitle{font-size:14px; font-weight:900;}
+    .ftag{font-size:11px; color:var(--muted); border:1px solid var(--line); padding:3px 8px; border-radius:999px; background:#fff;}
+    .flist{margin:0; padding-left:18px; font-size:13px; color:var(--muted); line-height:1.65;}
+
+    /* Videos */
+    .video-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+    .video-box{
+      border:1px solid var(--line);
+      border-radius:14px;
+      overflow:hidden;
+      background:#fff;
+      box-shadow: var(--shadow);
+    }
+    .video-frame{aspect-ratio:16/9; background:#000;}
+    .video-frame iframe{width:100%; height:100%; border:0;}
+    .note{color:var(--muted); font-size:13px; line-height:1.6;}
+    .pdf-frame{width:100%; height:78vh; min-height:520px; border:0;}
+
+    /* Buttons */
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      border:1px solid var(--line);
+      background:var(--soft);
+      color:var(--text);
+      padding:8px 10px;
+      border-radius:12px;
+      font-size:13px;
+      cursor:pointer;
+      text-decoration:none;
+      user-select:none;
+    }
+    .btn:hover{border-color:rgba(37,99,235,.35); background:rgba(37,99,235,.06);}
+    .btn.primary{
+      background:rgba(37,99,235,.10);
+      border-color:rgba(37,99,235,.28);
+      color:#1d4ed8;
+    }
+    .btn-row{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;}
+
+    /* Material viewer */
+    .material-wrap{margin-top:12px;}
+    .material-frame{width:100%; height:80vh; min-height:560px; border:1px solid var(--line); border-radius:14px; overflow:hidden; background:#fff; box-shadow: var(--shadow);}
+    .material-frame iframe{width:100%; height:100%; border:0;}
+
+
+    @media (max-width: 980px){
+      .app{grid-template-columns:1fr}
+      aside{position:relative; height:auto; border-right:none; border-bottom:1px solid var(--line)}
+      main{padding:20px 16px}
+      .grid{grid-template-columns: repeat(2, 1fr);}
+      .found-grid{grid-template-columns:1fr;}
+      .video-grid{grid-template-columns:1fr;}
+    }
+  
+    /* PDF thumbnail for course materials (kept minimal to avoid breaking card layout) */
+    .pdf-thumb-wrap{
+      position:absolute;
+      top:18px;
+      right:18px;
+      width:160px;
+      height:160px;
+      margin:0;
+      border:1px solid var(--border);
+      border-radius:12px;
+      overflow:hidden;
+      background:#fff;
+    }
+    .has-pdf-thumb{position:relative;}
+    .has-pdf-thumb{padding-right:190px;}
+    .pdf-thumb-iframe{
+      width:240px;
+      height:240px;
+      border:0;
+      transform:scale(0.70);
+      transform-origin:0 0;
+      pointer-events:none;
+    }
+    @media (max-width: 920px){
+      .pdf-thumb-wrap{
+      position:absolute;
+      top:18px;
+      right:18px;
+      width:160px;
+      height:160px;
+      margin:0;
+      border:1px solid var(--border);
+      border-radius:12px;
+      overflow:hidden;
+      background:#fff;
+    }
+    .has-pdf-thumb{position:relative;}
+    .has-pdf-thumb{padding-right:190px;}
+    .pdf-thumb-iframe{transform:scale(0.62);}
+    }
+    .profile-pic{
+      width:150px;
+      height:150px;
+      border-radius:50%;
+      object-fit:cover;
+      display:block;
+      margin:0 auto 10px auto;
+      border:3px solid #fff;
+      box-shadow:0 4px 12px rgba(15,23,42,.08);
+    }
+    .video-thumb-link { display:block; width:100%; height:100%; }
+    .video-thumb-img { width:100%; height:100%; object-fit:cover; display:block; }
+</style>
+</head>
+
+<body>
+  <div class="app">
+    <aside>
+      <div class="brand">
+        <img src="profile_pic.png" alt="Profile" class="profile-pic">
+        <p class="title" id="homeTitle">Tae Uk You</p>
+        <p class="sub">Senior Data Scientist at RBC</p>
+      </div>
+
+      <div class="nav-title">Sections</div>
+      <div class="menu" id="menu"></div>
+
+      <div class="nav-title">Resume</div>
+      <div class="card" style="padding:12px; box-shadow:none; margin:0;">
+        <a href="resume.pdf" target="_blank" rel="noreferrer">Open resume.pdf ↗</a>
+      </div>
+
+
+    </aside>
+
+    <main>
+      <div class="container" id="view"></div>
+    </main>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="modal">
+    <div class="modal-card">
+      <button class="modal-close" id="modalClose">Close ✕</button>
+      <img class="modal-img" id="modalImg" alt="Full image">
+    </div>
+  </div>
+
+  <script>
+    /**
+     * ✅ 반영사항
+     * 1) Herobot AI Challenge 추가 (사진은 내일 추가할 수 있도록 placeholder 준비)
+     * 2) "Photos"를 소주제 별로 분리하지 않고, 해당 페이지(소주제) 안에 블록으로 합침
+     * 3) Undergraduate 섹션 삭제 → Academic 안으로 합침
+     * 4) Featured 삭제 → 첫 화면은 About Me
+     *
+     * ✅ 폴더 구조(루트):
+     * - index.html
+     * - resume.pdf
+     * - about-me/...
+     * - rbc/...
+     * - twins/...
+     * - minnemudac/...
+     * - mudac-2019/...
+     * - undergraduate/...  (사진은 academic에서 사용)
+     */
+
+    const SITE = [
+    {
+        id: "about",
+        title: "About Me",
+        items: [
+          {
+            id: "about",
+            label: "About Me",
+            type: "page",
+            content: {
+              lead: "",
+              cards: [
+                {
+                  meta:"About Me",
+                  lines: [
+                    "<h3 style='font-size: 1.2rem; font-weight: bold; margin-bottom: 0.5rem;'>📈 The 'Stat Guy' You Actually Want to Talk To</h3>",
+                    "I'm the “stat guy” people across teams rely on for evidence-based insights and strategic clarity. I specialize in statistical modeling, machine learning, and advanced analytics. I transform complex data into actionable intelligence that drives decisions and reveals opportunities. I lead with curiosity and discipline, mentoring colleagues and building analytical cultures that create real impact.",
+                    "",
+                    "",
+                    "<h3 style='font-size: 1.2rem; font-weight: bold; margin-bottom: 0.5rem;'>🤖 Becoming the 'AI Guy' Your Organization Needs</h3>",
+                    "In the next five years, I aim to transition from delivering statistical insights to building comprehensive AI solutions. My goal is to create intelligent, agentic systems that autonomously provide insights and drive productivity gains across teams. To build this foundation, I'm currently taking “A Deep Understanding of LLMs,” the top rated LLM course on Udemy. I want to be known as the “AI guy” who builds solutions that scale impact organization-wide.",
+                    "",
+                    "",
+                    "<h3 style='font-size: 1.2rem; font-weight: bold; margin-bottom: 0.5rem;'>🎾 The Person Behind the 'Stat Guy'</h3>",
+                    "Off the clock, I'm a tennis addict. My best friend and I host the annual “CM Tennis Open” for our friends and family. Traveling with my family is my absolute favorite thing to do—recently, we explored Chicago and hiked Rocky Mountain National Park in Denver. I also enjoy golfing with friends and watching baseball (especially through an analytics lens). When I'm home, you'll find me cooking—seafood tomato pasta is my signature dish.",
+                    "<div style='height: 2rem;'></div>"
+                  ],
+                },
+              ],
+              twoColCards: [
+                {
+                  meta: "EDUCATION",
+                  h2: "🎓 Education",
+                  lines: [
+                    "University of Minnesota Twin Cities",
+                    "Double Major: B.A. Statistical Practice & B.S. Sports Management",
+                    "Minor: Computer Science",
+                    "Graduated in 2019",
+                  ],
+                },
+                {
+                  meta: "WORK",
+                  h2: "💻 Work",
+                  lines: [
+                    "RBC: Senior Data Scientist (June 2019 intern → present)",
+                    "Minnesota Twins: Player Translator (Jan 2017 – Dec 2017)",
+                    "Internships: Fox Sports, Fidelity Investments",
+                  ],
+                },
+              ],
+            },
+            photos: {
+              title: "  ",
+              folder: "about-me",
+              images: [
+                "about-profile.jpg",
+                "trip_philadelphia.jpg",
+                "travel_sanfrancisco.jpg",
+                "trip_denver.jpg",
+                "trip_chicago.jpg",
+                "hobby_baseball.jpg",
+                "hobby_golf.jpg",
+                "hobby_tennis.jpg",
+                "hobby_cooking.jpg"
+              ],
+              noCard: true,
+            },
+          },
+        ],
+      },
+
+      {
+        id: "academic",
+        title: "Academic",
+        items: [
+          {
+            id: "top10",
+            label: "Top 10 Quantitative",
+            type: "page",
+            content: {
+              kicker: "Academic",
+              h1: "Top 10 Quantitative Coursework",
+              lead: "Theory-first training with clear transfer to production: validation, stability, uncertainty, and defensible evaluation.",
+              cards: [
+                { meta:"STAT 4101 & 4102", h2:"Theory of Statistics I & II",
+                  lines:[
+                    "<b>Theory:</b> Probability theory, random variables, distributions",
+                    "<b>Models:</b> Estimation, hypothesis testing, asymptotic theory",
+                    "<b>Applied:</b> Model validation, statistical validity test, assumption testing in production ML"
+                  ],
+                  pills:["Probability","Inference","Asymptotics"],
+                  thumbPdf:"undergraduate_courses/stat4102_homework_example.pdf",
+                  cta: { text:"Course material highlight ↗", sectionId:"academic", itemId:"mat_stat4102" }
+                
+                },
+                { meta:"CSCI 2033", h2:"Linear Algebra",
+                  lines:[
+                    "<b>Theory:</b> Vector spaces, linear transformations",
+                    "<b>Methods:</b> Eigenvalues, matrix decompositions",
+                    "<b>Applied:</b> Model stability, feature transformations, regularization behavior"
+                  ],
+                  pills:["Stability","Transformations","Regularization"]
+                },
+                { meta:"STAT 5201 (Graduate)", h2:"Sampling Methodology",
+                  lines:[
+                    "<b>Theory:</b> Probability sampling, survey inference",
+                    "<b>Models:</b> Stratified, cluster, multistage sampling",
+                    "<b>Applied:</b> Representativeness + validation strategy for non-random client datasets"
+                  ],
+                  pills:["Sampling","Bias","Representativeness"],
+                  thumbPdf:"undergraduate_courses/stat5201_final.pdf",
+                  cta: { text:"Course material highlight ↗", sectionId:"academic", itemId:"mat_stat5201" }
+                
+                },
+                { meta:"CSCI 5521 (Graduate)", h2:"Introduction to Machine Learning",
+                  lines:[
+                    "<b>Models:</b> Regression, classification, clustering",
+                    "<b>Methods:</b> Regularization, evaluation, generalization",
+                    "<b>Applied:</b> Built/evaluated models used in decision-support and outcome prediction"
+                  ],
+                  pills:["Generalization","Evaluation","Python"],
+                  thumbPdf:"undergraduate_courses/csci5521_summary_notes.pdf",
+                  cta: { text:"Course material highlight ↗", sectionId:"academic", itemId:"mat_csci5521" }
+                
+                },
+                { meta:"STAT 3032", h2:"Regression and Correlated Data",
+                  lines:[
+                    "<b>Models:</b> Linear regression, generalized least squares",
+                    "<b>Methods:</b> Modeling correlated & longitudinal data",
+                    "<b>Applied:</b> Time-series regression for prediction + feature importance"
+                  ],
+                  pills:["GLS","Correlation","Time Series"],
+                  thumbPdf:"undergraduate_courses/stat3032_regression_hw_example.pdf",
+                  cta: { text:"Course material highlight ↗", sectionId:"academic", itemId:"mat_stat3032" }
+                
+                },
+                { meta:"STAT 4051 & 4052", h2:"Applied Statistics & Statistical Learning",
+                  lines:[
+                    "<b>Models:</b> Penalized regression, PCA, classification, tree-based methods",
+                    "<b>Theory:</b> Bias–variance tradeoff, model selection",
+                    "<b>Applied:</b> Balance interpretability, performance, and regulatory scrutiny"
+                  ],
+                  pills:["Model Selection","Bias-Variance","Interpretability"],
+                  thumbPdf:"undergraduate_courses/stat4051_weekly_homework_example.pdf",
+                  cta: { text:"Course material highlight (4051) ↗ ↗", sectionId:"academic", itemId:"mat_stat4051" }
+                
+                },
+                { meta:"CSCI 2011", h2:"Discrete Structures",
+                  lines:[
+                    "<b>Theory:</b> Logic, proofs, combinatorics, graph theory",
+                    "<b>Applied:</b> Feature engineering logic, data validation rules, system constraints"
+                  ],
+                  pills:["Proofs","Combinatorics","Constraints"],
+                  thumbPdf:"undergraduate_courses/csci1913_lecture_notes.pdf",
+                  cta: { text:"Related course materials (CSCI 1913) ↗ ↗", sectionId:"academic", itemId:"mat_csci1913_notes" }
+                
+                },
+                { meta:"STAT 4893W", h2:"Communication for Statisticians",
+                  lines:[
+                    "<b>Project:</b> Baseball Attendance Prediction using Regularized Regression",
+                    "<b>Applied:</b> MRM-style documentation + communicating model behavior to non-technical stakeholders"
+                  ],
+                  pills:["Communication","MRM","Documentation"],
+                  thumbPdf:"undergraduate_courses/stat4893w_individual_paper_regularizations.pdf",
+                  ctas:[
+                    { text:"Course material highlight ↗", sectionId:"academic", itemId:"mat_stat4893w_reg" },
+                    { text:"Course material highlight ↗", sectionId:"academic", itemId:"mat_stat4893w_med" }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            id: "foundational",
+            label: "Foundational Coursework",
+            type: "page",
+            content: {
+              kicker: "Academic",
+              h1: "Foundational Quantitative Coursework",
+              lead: "Breadth-focused coursework (from my updated resume) that supports rigorous reasoning in modeling and systems work.",
+              cards: [
+                { meta:"MATH 1271", h2:"Calculus I",
+                  lines:[
+                    "<b>Theory:</b> Limits, derivatives, single-variable differentiation",
+                    "<b>Applied Context:</b> Established mathematical intuition for rate-of-change modeling underlying optimization and gradient-based learning"
+                  ],
+                  pills:["Foundations"],
+                  thumbPdf:"undergraduate_courses/math1271_homework_example.pdf",
+                  cta: { text:"Course material highlight ↗", sectionId:"academic", itemId:"mat_math1271" }
+                
+                },
+                { meta:"CSCI 1913", h2:"Intro to Algo, Data Structures & Program Development",
+                  lines:[
+                    "<b>Theory:</b> Algorithmic logic, recursion, data structures",
+                    "<b>Applied Context:</b> Developed structured computational thinking for scalable data workflows"
+                  ],
+                  pills:["Foundations"],
+                  thumbPdf:"undergraduate_courses/csci1913_lecture_notes.pdf",
+                  ctas:[
+                    { text:"Course material highlight ↗", sectionId:"academic", itemId:"mat_csci1913_notes" },
+                    { text:"Course material highlight ↗", sectionId:"academic", itemId:"mat_csci1913_cheat" }
+                  ]
+                
+                },
+                { meta:"MATH 1272", h2:"Calculus II",
+                  lines:[
+                    "<b>Theory:</b> Integration techniques, sequences &amp; series",
+                    "<b>Applied Context:</b> Built foundation for accumulation modeling and convergence behavior in statistical estimation"
+                  ],
+                  pills:["Foundations"]
+                },
+                { meta:"CSCI 1113", h2:"Introduction to C/C++ Programming",
+                  lines:[
+                    "<b>Focus:</b> Low-level programming, memory management",
+                    "<b>Applied Context:</b> Strengthened understanding of computational efficiency and system-level reasoning"
+                  ],
+                  pills:["Foundations"],
+                  thumbPdf:"undergraduate_courses/csci1113_lecture_summary.pdf",
+                  cta: { text:"Course material highlight ↗", sectionId:"academic", itemId:"mat_csci1113" }
+                
+                },
+                { meta:"MATH 2241", h2:"Calculus for Management Science",
+                  lines:[
+                    "<b>Focus:</b> Multivariable calculus, constrained optimization",
+                    "<b>Methods:</b> Lagrange multipliers, objective function modeling",
+                    "<b>Applied Context:</b> Applied to structured decision optimization and resource allocation modeling"
+                  ],
+                  pills:["Foundations"]
+                },
+                { meta:"CSCI 1133", h2:"Programming and Problem Solving",
+                  lines:[
+                    "<b>Skills:</b> Modular programming, debugging, structured implementation",
+                    "<b>Applied Context:</b> Built early computational workflow discipline foundational to ML experimentation"
+                  ],
+                  pills:["Foundations"]
+                },
+                { meta:"MATH 1031", h2:"College Algebra for STEM",
+                  lines:[
+                    "<b>Theory:</b> Functional forms, exponential/logarithmic modeling",
+                    "<b>Applied Context:</b> Strengthened analytical reasoning for transformation behavior in modeling pipelines"
+                  ],
+                  pills:["Foundations"]
+                },
+                { meta:"STAT 3011", h2:"Introduction to Statistical Analysis",
+                  lines:[
+                    "<b>Theory:</b> Probability foundations, estimation, hypothesis testing",
+                    "<b>Applied Context:</b> Early exposure to inferential reasoning and uncertainty quantification"
+                  ],
+                  pills:["Foundations"]
+                }
+              ]
+            },
+            // (Optional) Add photos later if you want
+          },
+          {
+            id: "postgrad",
+            label: "Post-Graduate Training",
+            type: "page",
+            content: {
+              kicker: "Academic",
+              h1: "Post-Graduate Quantitative Training",
+              lead: "Self-directed, gap-driven learning selected to address production constraints.",
+              cards: [
+                {
+                  meta:"UDEMY — IN PROGRESS",
+                  h2:"Deep Understanding of LLMs: Architecture, Training & Mechanisms",
+                  lines:[
+                    "<b>Gap:</b> Built strong ML models and dashboards, but advisors often asked for insights directly via email instead of using the tools.",
+                    "<b>Motivation:</b> With AI initiatives expanding across the firm, aim to build agentic AI solutions that deliver insights conversationally and contextually.",
+                    "<b>Focus:</b> Understanding principles of transformer architectures, self-attention mechanisms, embedding layers with hands-on Python and PyTorch code."
+                  ],
+                  pills:["LLMs","Agentic AI","PyTorch","AI Strategy"]
+                },
+                { meta:"COURSERA — COMPLETE", h2:"IBM Data Science Professional Certificate",
+                  lines:[
+                    "<b>Gap:</b> consistent, production-ready Python workflows",
+                    "<b>Focus:</b> Python for data analysis, applied ML fundamentals",
+                    "<b>Transfer:</b> reinforced repeatable data processing/modeling patterns"
+                  ],
+                  pills:["Python","Workflows","Applied ML"]
+                },
+                { meta:"UDEMY — COMPLETE", h2:"Algorithm & Data Structure Bootcamp",
+                  lines:[
+                    "<b>Gap:</b> stronger algorithmic reasoning for scalable pipelines",
+                    "<b>Focus:</b> arrays, recursion, sorting/searching, time/space complexity",
+                    "<b>Transfer:</b> improved efficiency trade-offs in model pipelines"
+                  ],
+                  pills:["Complexity","Pipelines","Engineering"]
+                },
+                { meta:"UDEMY — COMPLETE", h2:"Complete Time Series Analysis with Python",
+                  lines:[
+                    "<b>Gap:</b> formal training for non-stationary financial time series",
+                    "<b>Focus:</b> stationarity, forecasting, ARIMA-family, regression-based approaches",
+                    "<b>Transfer:</b> informed forecasting choices in cash balance prediction"
+                  ],
+                  pills:["Time Series","Forecasting","ARIMA"]
+                },
+                { meta:"UDEMY — COMPLETE", h2:"Math for Data Science Masterclass",
+                  lines:[
+                    "<b>Gap:</b> strengthen intuition behind model behavior",
+                    "<b>Focus:</b> linear algebra, probability, optimization",
+                    "<b>Transfer:</b> sharpened “why models behave,” not just tuning"
+                  ],
+                  pills:["Theory","Optimization","Intuition"]
+                }
+              ]
+            }
+          },
+          {
+            id: "undergrad_photo",
+            label: "Photos",
+            type: "page",
+            content: {
+              kicker: "Academic",
+              h1: "Priceless Experiences and Shared Moments of Connection",
+              lead: "Great memories in classeroom, campus, consulting club, robotics club, and data competitions.",
+              
+            },
+            photos: {
+              title: " ",
+              folder: "undergraduate",
+              images: [
+                // TODO: 네 실제 파일명으로 교체 (전부 .jpg)
+                "about_umn.jpg",
+                "undergrad_robot.jpg",
+                "stat4893w-presentation.jpg",
+                "hackathon.jpg",
+                "stat4052.jpg",
+                "undergrad_friends.jpg",
+                "hackathon_sportsanalytics.jpg",
+                "undergrad_gogoAI.jpg",
+                "undergrad_consultingU.jpg"
+              ]
+            }
+          },
+          {
+            hidden: true,
+            id: "materials",
+            label: "Course Material Highlights",
+            type: "page",
+            content: {
+              kicker: "Academic",
+              h1: "Course Material Highlights",
+              lead: "Selected notes, homework, and projects that reflect how I learn: from first principles to defensible implementation.",
+              cards: [
+                { meta:"UNDERGRADUATE COURSES", h2:"Representative artifacts",
+                  bullets:[
+                    "<b>CSCI 1113</b> — Lecture summary (C/C++)",
+                    "<b>CSCI 1913</b> — Lecture notes + midterm cheat sheet (Data structures & algorithms)",
+                    "<b>MATH 1271</b> — Calculus homework example",
+                    "<b>STAT 3032</b> — Regression homework example",
+                    "<b>STAT 3701</b> — Statistical computing homework example",
+                    "<b>STAT 4051</b> — Weekly homework example",
+                    "<b>STAT 4052</b> — Final project report",
+                    "<b>STAT 4102</b> — Theory homework example",
+                    "<b>STAT 4893W</b> — Regularization paper + medical consulting report",
+                    "<b>STAT 5201 (Graduate)</b> — Final exam / project"
+                  ],
+                  pills:["Notes","Homework","Projects"]
+                }
+              ]
+            }
+          },
+
+          /* ---- Material detail pages (embedded PDFs) ---- */
+          {
+            hidden: true,
+            id: "mat_csci1113",
+            label: "CSCI 1113 — Lecture Summary",
+            type: "material",
+            material: {
+              kicker: "Course Material Highlight",
+              h1: "CSCI 1113 — Lecture Summary (C/C++)",
+              lead: "A concise, self-made lecture summary that helped me internalize low-level programming fundamentals.",
+              bullets: [
+                "Highlights core syntax + memory concepts in a compact reference format.",
+                "Reinforced disciplined debugging and step-by-step reasoning.",
+                "Useful foundation for understanding computational efficiency in later ML pipelines."
+              ],
+              src: "undergraduate_courses/csci1113_lecture_summary.pdf"
+            }
+          },
+          {
+            hidden: true,
+            id: "mat_csci1913_notes",
+            label: "CSCI 1913 — Lecture Notes",
+            type: "material",
+            material: {
+              kicker: "Course Material Highlight",
+              h1: "CSCI 1913 — Lecture Notes (Algorithms & Data Structures)",
+              lead: "My lecture notes focused on translating abstract data structures into implementable patterns.",
+              bullets: [
+                "Emphasis on invariants, correctness intuition, and edge cases.",
+                "Used as the backbone for homework and exam preparation.",
+                "Strengthened how I reason about scalable data workflows and algorithmic constraints."
+              ],
+              src: "undergraduate_courses/csci1913_lecture_notes.pdf"
+            }
+          },
+          {
+            hidden: true,
+            id: "mat_csci1913_cheat",
+            label: "CSCI 1913 — Midterm Cheat Sheet",
+            type: "material",
+            material: {
+              kicker: "Course Material Highlight",
+              h1: "CSCI 1913 — Midterm Cheat Sheet",
+              lead: "A one-page, high-signal cheat sheet: definitions, runtime intuition, and common pitfalls.",
+              bullets: [
+                "Condenses key ideas (big-O, recursion patterns, core data structures).",
+                "Built for fast retrieval under time pressure.",
+                "Reflects my preference for creating simple systems to reduce cognitive load."
+              ],
+              src: "undergraduate_courses/csci1913_midterm_cheatsheet.pdf"
+            }
+          },
+          {
+            hidden: true,
+            id: "mat_csci5521",
+            label: "CSCI 5521 — Summary Notes",
+            type: "material",
+            material: {
+              kicker: "Course Material Highlight",
+              h1: "CSCI 5521 — Summary Notes (Intro to Machine Learning)",
+              lead: "Graduate-level summary notes: models, assumptions, and evaluation logic.",
+              bullets: [
+                "Organized by model families with clear objective functions and failure modes.",
+                "Focus on generalization, validation strategy, and regularization behavior.",
+                "This course directly shaped how I evaluate models for decision-support use cases."
+              ],
+              src: "undergraduate_courses/csci5521_summary_notes.pdf"
+            }
+          },
+          {
+            hidden: true,
+            id: "mat_math1271",
+            label: "MATH 1271 — Homework Example",
+            type: "material",
+            material: {
+              kicker: "Course Material Highlight",
+              h1: "MATH 1271 — Calculus Homework Example",
+              lead: "A representative homework submission that shows my early quantitative foundations.",
+              bullets: [
+                "Reinforced disciplined step-by-step derivation.",
+                "Built intuition for change, optimization, and functional behavior.",
+                "Later transferred to gradient-based thinking in ML."
+              ],
+              src: "undergraduate_courses/math1271_homework_example.pdf"
+            }
+          },
+          {
+            hidden: true,
+            id: "mat_stat3032",
+            label: "STAT 3032 — Regression HW",
+            type: "material",
+            material: {
+              kicker: "Course Material Highlight",
+              h1: "STAT 3032 — Regression & Correlated Data (HW Example)",
+              lead: "A regression homework example emphasizing assumptions and interpretation—not just fitting.",
+              bullets: [
+                "Connects model form to correlation structure and inference logic.",
+                "Focus on diagnostics and explaining results clearly.",
+                "Skills that later transferred to defensible evaluation and MRM-style communication."
+              ],
+              src: "undergraduate_courses/stat3032_regression_hw_example.pdf"
+            }
+          },
+          {
+            hidden: true,
+            id: "mat_stat3701",
+            label: "STAT 3701 — HW Example",
+            type: "material",
+            material: {
+              kicker: "Course Material Highlight",
+              h1: "STAT 3701 — Statistical Computing (HW Example)",
+              lead: "A homework example showing applied computing skills for statistical analysis.",
+              bullets: [
+                "Implemented analysis workflows with attention to reproducibility.",
+                "Reinforced data cleaning discipline and structured experimentation.",
+                "Early groundwork for production-ready analytics workflows."
+              ],
+              src: "undergraduate_courses/stat3701_homework_example.pdf"
+            }
+          },
+          {
+            hidden: true,
+            id: "mat_stat4051",
+            label: "STAT 4051 — Weekly HW",
+            type: "material",
+            material: {
+              kicker: "Course Material Highlight",
+              h1: "STAT 4051 — Statistical Learning (Weekly HW Example)",
+              lead: "Weekly homework emphasizing model comparison and the bias–variance tradeoff.",
+              bullets: [
+                "Comparisons across methods with clear evaluation criteria.",
+                "Focus on interpretability trade-offs, not only accuracy.",
+                "A practical bridge from theory to deployment-minded thinking."
+              ],
+              src: "undergraduate_courses/stat4051_weekly_homework_example.pdf"
+            }
+          },
+          {
+            hidden: true,
+            id: "mat_stat4052",
+            label: "STAT 4052 — Final Project",
+            type: "material",
+            material: {
+              kicker: "Course Material Highlight",
+              h1: "STAT 4052 — Final Project Report",
+              lead: "Capstone-style project applying statistical learning end-to-end.",
+              bullets: [
+                "Problem framing → feature work → model selection → evaluation narrative.",
+                "Demonstrates how I document assumptions and limitations explicitly.",
+                "A direct precursor to how I write production model documentation today."
+              ],
+              src: "undergraduate_courses/stat4052_final_project.pdf"
+            }
+          },
+          {
+            hidden: true,
+            id: "mat_stat4102",
+            label: "STAT 4102 — Homework",
+            type: "material",
+            material: {
+              kicker: "Course Material Highlight",
+              h1: "STAT 4102 — Theory of Statistics II (HW Example)",
+              lead: "Theory-focused homework showing probability and inference from first principles.",
+              bullets: [
+                "Highlights formal reasoning, not just computation.",
+                "Built confidence with asymptotic thinking and distributional logic.",
+                "Foundation for understanding uncertainty and model assumptions in practice."
+              ],
+              src: "undergraduate_courses/stat4102_homework_example.pdf"
+            }
+          },
+          {
+            hidden: true,
+            id: "mat_stat4893w_reg",
+            label: "STAT 4893W — Regularizations Paper",
+            type: "material",
+            material: {
+              kicker: "Course Material Highlight",
+              h1: "STAT 4893W — Individual Paper (Regularization)",
+              lead: "A writing sample focused on explaining regularization clearly and defensibly.",
+              bullets: [
+                "Connects L1/L2 intuition to bias–variance behavior.",
+                "Written for readers who need clarity, not jargon.",
+                "Directly transferable to Model Risk Management-style documentation."
+              ],
+              src: "undergraduate_courses/stat4893w_individual_paper_regularizations.pdf"
+            }
+          },
+          {
+            hidden: true,
+            id: "mat_stat4893w_med",
+            label: "STAT 4893W — Medical Consulting",
+            type: "material",
+            material: {
+              kicker: "Course Material Highlight",
+              h1: "STAT 4893W — Medical Data Consulting Report",
+              lead: "Consulting-style statistical report emphasizing assumptions, interpretability, and honest conclusions.",
+              bullets: [
+                "Clear narrative: question → design → analysis → conclusion → limitations.",
+                "Shows comfort explaining ‘no effect’ results when the data supports it.",
+                "Helped shape how I communicate uncertainty to non-technical stakeholders."
+              ],
+              src: "undergraduate_courses/stat4893w_medical_data_consulting.pdf"
+            }
+          },
+          {
+            hidden: true,
+            id: "mat_stat5201",
+            label: "STAT 5201 — Final",
+            type: "material",
+            material: {
+              kicker: "Course Material Highlight",
+              h1: "STAT 5201 (Graduate) — Sampling Methodology Final",
+              lead: "Graduate-level sampling theory work focused on representativeness and inference under design constraints.",
+              bullets: [
+                "Highlights how sampling design affects inference and downstream evaluation.",
+                "Reinforced thinking about bias, coverage, and validation strategy.",
+                "Directly relevant to real-world non-random client datasets."
+              ],
+              src: "undergraduate_courses/stat5201_final.pdf"
+            }
+          }
+
+        ]
+      },
+
+      {
+        id: "competitions",
+        title: "Competitions",
+        items: [
+          {
+            id: "minnemudac",
+            label: "MinneaMUDAC 2018",
+            type: "page",
+            content: {
+              kicker: "Competitions",
+              h1: "MinneaMUDAC 2018 — Voter Turnout Prediction",
+              lead: "Feature construction from demographic/voting-history signals. Defensible evaluation under noisy, real-world conditions.",
+              cards: [
+                { meta:"AWARD", h2:"Serendipitous Discovery Award (Undergraduate)",
+                  lines:[
+                    "<b>Applied Coursework:</b> STAT 4051/4052, STAT 3701",
+                    "<b>Focus:</b> Feature construction + defensible evaluation under noise",
+                    "<b>Outcome:</b> Identified non-obvious patterns and translated them into interpretable predictive insights"
+                  ],
+                  pills:["Evaluation","Interpretability","Noise"]
+                },
+                {
+                  meta:"BLOG",
+                  h2:"Reflection — MinneMUDAC 2018",
+                  lines:[
+                    "MinneMUDAC 2018 was the first time I experienced machine learning without a script. In class, datasets were clean and expectations were defined. Here, nothing was given. We had to decide what the problem truly was and defend every modeling choice.",
+                    
+                    "<b>The dataset consisted mostly of aggregate demographic statistics rather than individual-level voter data. At first, everything looked numeric and manageable. But I quickly learned that numbers without context can mislead. We had to think carefully about what each proportion represented and how it should function as a predictor.",
+                    
+                    "<b>The hardest question was not which model to use, but how to validate it. With only 48 observations, a random split felt unstable. Leave-One-Out Cross-Validation seemed rigorous but overly strict for the decision tree methods we were testing. We ultimately chose k-fold cross-validation as a principled compromise—balancing rigor with practical constraints.",
+                    
+                    "<b>We also debated whether to use midterm or presidential election history. Rather than relying on intuition, we tested our assumption statistically by comparing predicted and actual turnout ratios across years. Midterm data aligned more consistently with our target, so we committed to it.",
+                    
+                    "<b>Our team nearly dissolved after two members withdrew early on. We rebuilt, divided responsibilities clearly, and pushed forward. Even when an advisor suggested voter turnout might be fundamentally unpredictable, we chose to continue. The learning process itself mattered.",
+                    
+                    "<b>By the time we presented five times to rotating panels of judges, the project felt less like a competition and more like real work—define the problem, validate assumptions, acknowledge limitations, iterate, and communicate clearly.",
+                    
+                    "<b>What stayed with me most was not becoming a finalist, but realizing I could help carry a project from uncertainty to completion. For the first time, I was not following instructions—I was building something."
+                  ],
+                  pills:["Real-World ML","Validation Design","Empirical Thinking","Team Resilience"]
+                }
+              ]
+            },
+            photos: {
+              title: "Photos",
+              folder: "minnemudac",
+              images: [
+                // TODO: 네 실제 파일명 (전부 .jpg)
+                "minnemudac-advisor.jpg",
+                "minnemudac-presentation.jpg",
+                "minnemudac-presentation2.jpg",
+                "minnemudac-team.jpg",
+                "minnemudac-team2.jpg",
+                "minnemudac-award.jpg"
+              ]
+            }
+          },
+
+          {
+            id: "mudac2019",
+            label: "MUDAC 2019",
+            type: "page",
+            content: {
+              kicker: "Competitions",
+              h1: "MUDAC 2019 — Water Quality Classification",
+              lead: "Correlated environmental measurements + stakeholder-friendly interpretability.",
+              cards: [
+                { meta:"TEAM", h2:"University of Minnesota Statistics Team",
+                  lines:[
+                    "<b>Applied Coursework:</b> STAT 3032, STAT 4101/4102",
+                    "<b>Focus:</b> Handling correlated measurements; balancing complexity vs interpretability",
+                    "<b>Outcome:</b> Strengthened theory-to-practice ability in team-based classification"
+                  ],
+                  pills:["Correlation","Classification","Stakeholders"]
+                }
+              ]
+            },
+            photos: {
+              title: "Photos",
+              folder: "mudac-2019",
+              images: [
+                // TODO: 네 실제 파일명 (전부 .jpg)
+                "mudac-allteams.jpg",
+                "mudac-allteams2.jpg",
+                "mudac-award.jpg",
+                "mudac-hackathon.jpg",
+                "mudac-solvingsolutions.jpg",
+                "mudac-solvingsolutions2.jpg",
+                "mudac-team1.jpg",
+                "mudac-teamdinner.jpg",
+                "mudac-waitingjudge.jpg"
+              ]
+            }
+          },
+
+          {
+            id: "herobot",
+            label: "Herobot AI Challenge 2019",
+            type: "page",
+            content: {
+              kicker: "Competitions",
+              h1: "Herobot AI Challenge 2019 — Bitcoin Price Prediction",
+              lead: "Early exposure to time-series modeling under extreme volatility and non-stationary behavior.",
+              cards: [
+                { meta:"CONTEXT", h2:"Time series under instability",
+                  lines:[
+                    "<b>Applied Coursework:</b> STAT 3701, STAT 4051/4052",
+                    "<b>Focus:</b> Feature engineering for time series; robustness checks under regime shifts",
+                    "<b>Outcome:</b> Learned limitations of forecasting in unstable markets—insight that later informed industry time-series work"
+                  ],
+                  pills:["Time Series","Non-stationary","Robustness"]
+                }
+              ]
+            },
+            photos: {
+              title: "Photos (to add)",
+              folder: "herobot",
+              images: [
+                // 내일 사진 올리면 여기 파일명만 추가하면 끝.
+                // 예: "herobot-1.jpg", "herobot-2.jpg"
+              ],
+              placeholder: true
+            }
+          }
+        ]
+      },
+
+      {
+        id: "work",
+        title: "Projects",
+        items: [
+          {
+            id: "rbc",
+            label: "RBC",
+            type: "page",
+            content: {
+              kicker: "Highlighted Projects at RBC",
+              h1: "My RBC Journey",
+              lead: "I met RBC at the University of Minnesota CSE Career Fair in 2019\u2014an unexpected conversation that became my entry point into wealth-management analytics. I started as a Summer 2019 intern, continued through a Fall 2019 Clearing & Custody internship via coffee chats and internal networking, and joined full\u2011time in January 2020. Over time I moved from Data Analyst to Senior Data Analyst (September 2022) within the Private Client Group (PCG), and in August 2025 stepped into a Senior Data Scientist role. The projects below are admissions\u2011friendly summaries\u2014focused on validation, interpretability, monitoring, and real\u2011world adoption, without proprietary details.",
+              cards: [
+                {
+                  meta:"PROJECT 1 \u2014 FORECASTING",
+                  h2:"Cash Sweep Balance Prediction",
+                  lines:[
+                    "<b>Problem:</b> Cash sweep balance was treated as a flat assumption in forward KPI forecasts, limiting visibility into liquidity trends.",
+                    "<b>Solution:</b> Designed and deployed a time-series regression model to forecast cash sweep balance as % of AUA, with assumption checks and holdout validation.",
+                    "<b>Outcome & limitation:</b> Added 1\u2011month projections to executive KPI reporting to improve planning precision; longer horizons were intentionally constrained to preserve reliability."
+                  ],
+                  pills:["Time Series", "Validation", "Uncertainty"]
+                },
+                {
+                  meta:"PROJECT 2 \u2014 DECISION SUPPORT",
+                  h2:"Successful WealthPlan Classification",
+                  lines:[
+                    "<b>Problem:</b> No quantitative framework existed to determine which completed WealthPlans translated into Net New Assets (NNA).",
+                    "<b>Solution:</b> Built an interpretable tree-based classifier and used SHAP to provide transparent feature attribution for stakeholders.",
+                    "<b>Outcome & limitation:</b> Delivered a deployable \u201cPlan Success Score\u201d to prioritize outreach; realized impact depended on advisor engagement with the insights."
+                  ],
+                  pills:["Interpretability", "SHAP", "Adoption"]
+                },
+                {
+                  meta:"PROJECT 3 \u2014 CLIENT GROWTH",
+                  h2:"Money-in-Motion Estimation",
+                  lines:[
+                    "<b>Problem:</b> Advisors lacked a systematic way to quantify the likelihood of external asset inflows (held\u2011away assets).",
+                    "<b>Solution:</b> Co-developed a supervised-learning scoring model with a vendor, combining life-event and engagement signals for Salesforce deployment.",
+                    "<b>Outcome & limitation:</b> Enabled probability-based outreach prioritization and measurable inflow lift; adoption varied as some senior advisors favored relationship-driven intuition."
+                  ],
+                  pills:["Scoring", "Salesforce", "Behavior"]
+                },
+                {
+                  meta:"PROJECT 4 \u2014 PERFORMANCE DRIVERS",
+                  h2:"Advisor Classification for Positive Net New Assets",
+                  lines:[
+                    "<b>Problem:</b> Advisor contributions to NNA varied widely without quantified drivers of sustained performance.",
+                    "<b>Solution:</b> Built an ML model using book composition and engagement features; used SHAP to separate structural drivers from short-term noise.",
+                    "<b>Outcome & limitation:</b> Identified actionable predictors to inform leadership training; effectiveness varied by regional execution consistency."
+                  ],
+                  pills:["Drivers", "SHAP", "Field Execution"]
+                },
+                {
+                  meta:"PROJECT 5 \u2014 MONITORING",
+                  h2:"Daily Analytic Monitoring Dashboard",
+                  lines:[
+                    "<b>Problem:</b> Fragmented KPI reporting reduced clarity and slowed executive decision-making.",
+                    "<b>Solution:</b> Engineered automated Python\u2013SQL pipelines and deployed a governed Tableau dashboard with metric definitions and alert thresholds.",
+                    "<b>Outcome & limitation:</b> Reduced manual reporting by ~30 minutes/day and centralized KPI visibility; sustained impact relies on ongoing data governance discipline."
+                  ],
+                  pills:["Pipelines", "Tableau", "Governance"]
+                },
+                {
+                  meta:"PROJECT 6 \u2014 BENCHMARKING",
+                  h2:"Financial Advisor Ranking Dashboard",
+                  lines:[
+                    "<b>Problem:</b> Spreadsheet-based advisor rankings lacked scalability and transparency.",
+                    "<b>Solution:</b> Built a structured SQL data mart and automated ETL to quantify revenue performance across organizational hierarchies.",
+                    "<b>Outcome & limitation:</b> Enabled reproducible quarterly benchmarking for branch leadership; requires periodic alignment as business definitions evolve."
+                  ],
+                  pills:["SQL Mart", "ETL", "Benchmarking"]
+                },
+                {
+                  meta:"PROJECT 7 \u2014 IMPACT MEASUREMENT",
+                  h2:"Wealth Plan Associates Impact Quantification",
+                  lines:[
+                    "<b>Problem:</b> There was no measurable framework to quantify Wealth Plan Associates\u2019 (WPA) contribution to NNA growth.",
+                    "<b>Solution:</b> Applied regression analysis to estimate relationships between consultation intensity and asset growth outcomes.",
+                    "<b>Outcome & limitation:</b> Produced a first ROI estimate to support resource allocation; analysis is observational (non-experimental) by nature."
+                  ],
+                  pills:["Regression", "Causal Limits", "ROI"]
+                },
+                {
+                  meta:"PROJECT 8 \u2014 ADOPTION ANALYTICS",
+                  h2:"Clearing & Custody Product Adoption Analytics",
+                  lines:[
+                    "<b>Problem:</b> Limited transparency into product adoption across IRA and BD firms.",
+                    "<b>Solution:</b> Built a firm-level adoption dataset and automated reporting pipeline to quantify penetration trends and usage metrics.",
+                    "<b>Outcome & limitation:</b> Improved strategic account preparation for site visits; cadence constrained by upstream data refresh cycles."
+                  ],
+                  pills:["Adoption", "Trends", "Automation"]
+                }
+              ],
+            },
+            photos: {
+              title: "Happy Hours with RBC teammates",
+              folder: "rbc",
+              images: [
+                // TODO: 실제 파일명으로 맞추기 (전부 .jpg)
+                "rbc_analytics.jpg",
+                "rbc_analytics2.jpg",
+                "rbc_past.jpg"
+              ]
+            }
+          }
+        ]
+      },
+
+      {
+        id: "experience",
+        title: "Experience",
+        items: [
+          {
+            id: "twins",
+            label: "Minnesota Twins",
+            type: "page",
+            content: {
+              kicker: "Experience",
+              h1: "Minnesota Twins — Player Interpreter",
+              lead: "A full-time role requiring precision, fast context switching, and high-stakes communication. It shaped how I value preparation systems under uncertainty.",
+              cards: [
+                {
+                  meta:"CAREER CONTEXT",
+                  h2:"Academic continuity & deliberate return",
+                  bullets:[
+                    "<b>Spring 2017 — Course Withdrawals (STAT 5302 / STAT 5303)</b>: accepted full-time interpreter role with relocation and extensive travel.",
+                    "<b>Outcome:</b> firsthand exposure to environments where performance, uncertainty, and decision-making intersect.",
+                    "<b>Return:</b> came back with renewed clarity; elevated Statistics as primary major and added a Computer Science minor.",
+                    "<b>Relevance:</b> reinforced the importance of strong theoretical foundations in high-stakes real-world analysis."
+                  ],
+                  pills:["Communication","Uncertainty","Preparation"]
+                }
+              ]
+            },
+            videos: [
+              { title:"Interview 1", url:"https://www.youtube.com/embed/-ljz7fdl2Lc", link:"https://youtu.be/-ljz7fdl2Lc?si=20nLTSX0_r-ETQoH", thumb:"twins/twins_interview_1.jpg" },
+              { title:"Interview 2", url:"https://www.youtube.com/embed/-6yRLXDbNis", link:"https://youtu.be/-6yRLXDbNis?si=yIuDeANS9_t5hS-F", thumb:"twins/twins_interview_2.jpg" }
+            ],
+            photos: {
+              title: "Photos",
+              folder: "twins",
+              images: [
+                // TODO: 실제 파일명
+                "twins-1.jpg",
+                "twins-2.jpg",
+                "twins-3.jpg",
+                "twins-17.jpg",
+                "twins-18.jpg",
+                "twins-19.jpg"
+              ]
+            }
+          },
+
+          {
+            id: "intern",
+            label: "Internships",
+            type: "page",
+            content: {
+              kicker: "Experience",
+              h1: "Past internships before RBC",
+              lead: "A full-time role requiring precision, fast context switching, and high-stakes communication. It shaped how I value preparation systems under uncertainty.",
+              cards: [
+                {
+                  meta:"RBC — Summer IT Intern (2019.06 – 2019.12)",
+                  h2:"Cost Transparency Dashboard (End-to-End Build)",
+                  bullets:[
+                    "<b>Problem:</b> Internal cost reporting lacked transparency and required manual aggregation across multiple data sources.",
+                    "<b>Solution:</b> Designed and built a full-cycle Cost Transparency Dashboard — from raw data extraction to cleaning, curation, transformation, and scheduled automation.",
+                    "<b>Technical Depth:</b> Wrote complex SQL queries for structured data extraction and joins; significantly strengthened relational database fluency.",
+                    "<b>Impact:</b> Delivered a repeatable reporting system that improved cost visibility and reduced ad-hoc manual analysis.",
+                    "<b>Growth:</b> Built foundational wealth management domain knowledge that later accelerated my transition into analytics within RBC."
+                  ],
+                  pills:["SQL","Data Pipeline Design","Dashboarding","Wealth Management","End-to-End Ownership"]
+                },
+
+                {
+                  meta:"Fox Sports — Data Analytics Intern (2017.01 – 2017.02)",
+                  h2:"Sports Engagement & Media Analytics",
+                  bullets:[
+                    "<b>Problem:</b> Needed structured insight into social media performance, in-game advertisement effectiveness, and app user engagement.",
+                    "<b>Work:</b> Extracted user transaction data from social media databases and built performance dashboards to evaluate engagement metrics.",
+                    "<b>Impact:</b> Contributed to a 36% increase in user reactions on Fox Sports social media through data-driven optimization.",
+                    "<b>Additional Projects:</b> Built usage tracking dashboard for the Fox Sports Go app using Google Analytics; visualized in-game advertisement execution data in Power BI.",
+                    "<b>Growth:</b> Learned to translate fast-moving, high-volume sports data into actionable insights under tight deadlines."
+                  ],
+                  pills:["Dashboarding","Google Analytics","Power BI","Engagement Metrics","Time Pressure"]
+                },
+
+                {
+                  meta:"Fidelity Investments — Data Analytics Intern (2015.09 – 2015.12)",
+                  h2:"Financial Media & Sentiment Analytics",
+                  bullets:[
+                    "<b>Problem:</b> Financial stakeholders required insight into market sentiment and media trends related to emerging regulatory and crypto topics.",
+                    "<b>Work:</b> Queried and extracted media data from Factiva and social media data from Radian6; conducted sentiment analysis on discussions surrounding the Department of Labor’s Fiduciary Rule.",
+                    "<b>Deliverable:</b> Built dashboards with exploratory visualizations and word clouds to summarize sentiment trends.",
+                    "<b>Communication:</b> Authored Weekly Data Digest summaries translating quantitative findings into executive-friendly insights.",
+                    "<b>Growth:</b> Gained early exposure to finance-domain data rigor and narrative-driven analytical reporting."
+                  ],
+                  pills:["Factiva","Radian6","Sentiment Analysis","Financial Data","Executive Communication"]
+                }
+              ]
+            },
+            photos: {
+              title: "Internship memories",
+              folder: "experience",
+              images: [
+                // TODO: 실제 파일명으로 맞추기 (전부 .jpg)
+                "rbc_1.jpg",
+                "RBC-Intern.jpg",
+                "RBC-Intern2.jpg",
+                "RBC-Intern3.jpg",
+                "RBC-Intern4.jpg",
+                "RBC-Intern6.jpg",
+                "RBC-Intern7.jpg",
+                "RBC-Presentation.jpg",
+                "RBC-Presentation2.jpg",
+                "foxsports-intern2.jpg",
+                "foxsports-intern.jpg",
+                "fidelity_1.jpg",
+                "fidelity_2.jpg",
+                "fidelity_3.jpg",
+                "fidelity_4.jpg"
+              ]
+            }
+          }
+        ]
+      },
+
+      {
+        id: "resume",
+        title: "Resume",
+        items: [
+          { id:"pdf", label:"View PDF", type:"pdf" }
+        ]
+      }
+    ];
+
+    // ---------- Helpers ----------
+    const menuEl = document.getElementById("menu");
+    const viewEl = document.getElementById("view");
+    const homeTitle = document.getElementById("homeTitle");
+
+    const modal = document.getElementById("modal");
+    const modalImg = document.getElementById("modalImg");
+    const modalClose = document.getElementById("modalClose");
+
+    let current = { sectionId: "about", itemId: "about" };
+
+    function el(tag, attrs={}, children=[]){
+      const e = document.createElement(tag);
+      for(const [k,v] of Object.entries(attrs)){
+        if(k === "class") e.className = v;
+        else if(k === "html") e.innerHTML = v;
+        else e.setAttribute(k, v);
+      }
+      for(const c of children){
+        if(typeof c === "string") e.appendChild(document.createTextNode(c));
+        else if(c) e.appendChild(c);
+      }
+      return e;
+    }
+
+    function openModal(src){
+      modalImg.src = src;
+      modal.classList.add("open");
+    }
+    function closeModal(){
+      modal.classList.remove("open");
+      modalImg.src = "";
+    }
+    modal.addEventListener("click", (e) => { if(e.target === modal) closeModal(); });
+    modalClose.addEventListener("click", closeModal);
+    window.addEventListener("keydown", (e) => { if(e.key === "Escape") closeModal(); });
+
+    // ---------- Menu ----------
+    function renderMenu(){
+      menuEl.innerHTML = "";
+      SITE.forEach(sec => {
+        const item = el("div", {class:"menu-item", "data-sec":sec.id});
+        const btn = el("button", {class:"menu-btn", type:"button"}, [
+          el("div", {class:"left"}, [
+            el("div", {}, [sec.title]),
+            el("small", {}, [sec.desc || ""])
+          ]),
+          el("div", {class:"chev"}, ["▾"])
+        ]);
+
+        btn.addEventListener("click", () => {
+          const open = item.classList.toggle("open");
+          document.querySelectorAll(".menu-item").forEach(x => { if(x !== item) x.classList.remove("open"); });
+          if(open && sec.items?.length){
+            select(sec.id, sec.items[0].id);
+          }
+        });
+
+        const submenu = el("div", {class:"submenu"});
+        const items = (sec.items || []);
+        const visible = (sec.id==="academic")
+          ? items.filter(it => ["top10","foundational","postgrad","undergrad_photo"].includes(it.id))
+          : items;
+        visible.forEach(it => {
+          const sb = el("button", {class:"subbtn", type:"button", "data-item":it.id}, [
+            el("div", {}, [it.label]),
+            el("span", {}, ["→"])
+          ]);
+          sb.addEventListener("click", () => select(sec.id, it.id));
+          submenu.appendChild(sb);
+        });
+
+        item.appendChild(btn);
+        item.appendChild(submenu);
+        menuEl.appendChild(item);
+      });
+    }
+
+    function setActiveSub(){
+      document.querySelectorAll(".subbtn").forEach(b => b.classList.remove("active"));
+      const active = document.querySelector(`.menu-item[data-sec="${current.sectionId}"] .subbtn[data-item="${current.itemId}"]`);
+      if(active) active.classList.add("active");
+
+      document.querySelectorAll(".menu-item").forEach(x => x.classList.remove("open"));
+      const parent = document.querySelector(`.menu-item[data-sec="${current.sectionId}"]`);
+      if(parent) parent.classList.add("open");
+    }
+
+    function select(sectionId, itemId){
+      current = { sectionId, itemId };
+      setActiveSub();
+      renderView();
+      window.scrollTo({top:0, behavior:"instant"});
+    }
+
+    function getCurrentItem(){
+      const sec = SITE.find(s => s.id === current.sectionId);
+      if(!sec) return null;
+      const it = (sec.items || []).find(i => i.id === current.itemId);
+      return { sec, it };
+    }
+
+    
+    // ---------- Course material mappings (for thumbnails + button labels) ----------
+    const MATERIAL_LABELS = {
+      mat_csci1113: "CSCI 1113 — Lecture Summary",
+      mat_csci1913_notes: "CSCI 1913 — Lecture Notes",
+      mat_csci1913_cheat: "CSCI 1913 — Midterm Cheat Sheet",
+      mat_csci5521: "CSCI 5521 — Summary Notes",
+      mat_math1271: "MATH 1271 — Homework Example",
+      mat_stat3032: "STAT 3032 — Regression HW Example",
+      mat_stat3701: "STAT 3701 — Homework Example",
+      mat_stat4051: "STAT 4051 — Weekly HW Example",
+      mat_stat4052: "STAT 4052 — Final Project",
+      mat_stat4102: "STAT 4102 — Homework Example",
+      mat_stat4893w_reg: "STAT 4893W — Regularizations Paper",
+      mat_stat4893w_med: "STAT 4893W — Medical Data Consulting",
+      mat_stat5201: "STAT 5201 — Final"
+    };
+
+    const MATERIAL_PDFS = {
+      mat_csci1113: "undergraduate_courses/csci1113_lecture_summary.pdf",
+      mat_csci1913_notes: "undergraduate_courses/csci1913_lecture_notes.pdf",
+      mat_csci1913_cheat: "undergraduate_courses/csci1913_midterm_cheatsheet.pdf",
+      mat_csci5521: "undergraduate_courses/csci5521_summary_notes.pdf",
+      mat_math1271: "undergraduate_courses/math1271_homework_example.pdf",
+      mat_stat3032: "undergraduate_courses/stat3032_regression_hw_example.pdf",
+      mat_stat3701: "undergraduate_courses/stat3701_homework_example.pdf",
+      mat_stat4051: "undergraduate_courses/stat4051_weekly_homework_example.pdf",
+      mat_stat4052: "undergraduate_courses/stat4052_final_project.pdf",
+      mat_stat4102: "undergraduate_courses/stat4102_homework_example.pdf",
+      mat_stat4893w_reg: "undergraduate_courses/stat4893w_individual_paper_regularizations.pdf",
+      mat_stat4893w_med: "undergraduate_courses/stat4893w_medical_data_consulting.pdf",
+      mat_stat5201: "undergraduate_courses/stat5201_final.pdf"
+    };
+// ---------- Render blocks ----------
+    function renderCardBlock(c){
+      const card = el("div", {class:"card"});
+      if(c.meta) card.appendChild(el("div", {class:"meta"}, [c.meta]));
+      if(c.h2) card.appendChild(el("h2", {}, [c.h2]));
+
+      // Right-side PDF thumbnail (first page) for course material highlights
+      if(c.cta && c.cta.itemId && MATERIAL_PDFS[c.cta.itemId]){
+        card.classList.add("has-pdf-thumb");
+        const thumb = el("div", {class:"pdf-thumb-wrap"});
+        const iframe = el("iframe", {class:"pdf-thumb-iframe", src: MATERIAL_PDFS[c.cta.itemId] + "#page=1&zoom=page-width", title:"PDF preview"});
+        iframe.setAttribute("loading","lazy");
+        thumb.appendChild(iframe);
+        card.appendChild(thumb);
+      }
+
+      if(c.lines?.length){
+        c.lines.forEach(line => card.appendChild(el("p", {class:"kv", html:line})));
+      }
+      if(c.bullets?.length){
+        const ul = el("ul", {});
+        c.bullets.forEach(b => ul.appendChild(el("li", {html:b})));
+        card.appendChild(ul);
+      }
+      if(c.pills?.length){
+        const pillWrap = el("div", {});
+        c.pills.forEach(p => pillWrap.appendChild(el("span", {class:"pill"}, [p])));
+        card.appendChild(pillWrap);
+      }
+
+      if(c.ctas && Array.isArray(c.ctas) && c.ctas.length){
+        const row = el("div", {class:"btn-row"});
+        c.ctas.forEach(ctaObj => {
+          const label = (ctaObj && ctaObj.itemId) ? MATERIAL_LABELS[ctaObj.itemId] : null;
+          const btnText = label ? ("Course material highlight: " + label + " ↗") : (ctaObj.text || "Course material highlight ↗");
+          const b = el("button", {class:"btn primary", type:"button"}, [btnText]);
+          b.addEventListener("click", () => select(ctaObj.sectionId || sectionId, ctaObj.itemId));
+          row.appendChild(b);
+        });
+        card.appendChild(row);
+      } else if(c.cta){
+        const row = el("div", {class:"btn-row"});
+        const label = (c.cta && c.cta.itemId) ? MATERIAL_LABELS[c.cta.itemId] : null;
+        const btnText = label ? ("Course material highlight: " + label + " ↗") : (c.cta.text || "Course material highlight ↗");
+        const b = el("button", {class:"btn primary", type:"button"}, [btnText]);
+        b.addEventListener("click", () => select(c.cta.sectionId || sectionId, c.cta.itemId));
+        row.appendChild(b);
+        card.appendChild(row);
+      }
+      return card;
+    }
+
+    function renderPhotosBlock(photos){
+      const wrap = el("div", {class:"card"});
+      wrap.appendChild(el("div", {class:"meta"}, ["PHOTOS"]));
+      wrap.appendChild(el("h2", {}, [photos.title || "Photos"]));
+
+      if(photos.placeholder && (!photos.images || photos.images.length === 0)){
+        wrap.appendChild(el("p", {class:"note"}, ["(Add photos later) 파일을 폴더에 넣고, 여기 images 배열에 파일명만 추가하면 자동으로 표시됩니다."]));
+        return wrap;
+      }
+
+      const grid = el("div", {class:"grid"});
+      (photos.images || []).forEach(name => {
+        const src = `${photos.folder}/${name}`;
+        const t = el("div", {class:"thumb", role:"button", tabindex:"0"});
+        const img = el("img", {src, alt:name, loading:"lazy"});
+        t.appendChild(img);
+        t.addEventListener("click", () => openModal(src));
+        t.addEventListener("keydown", (e) => { if(e.key === "Enter" || e.key === " ") openModal(src); });
+        grid.appendChild(t);
+      });
+      wrap.appendChild(grid);
+
+      const tip = el("div", {class:"hr"});
+      wrap.appendChild(tip);
+      return wrap;
+    }
+
+    function renderVideosBlock(videos){
+      const wrap = el("div", {class:"card"});
+      wrap.appendChild(el("div", {class:"meta"}, ["VIDEOS"]));
+      wrap.appendChild(el("h2", {}, ["Interviews"]));
+
+      const grid = el("div", {class:"video-grid"});
+      (videos || []).forEach(v => {
+        const box = el("div", {class:"video-box"});
+        const frame = el("div", {class:"video-frame"});
+        // If thumbnail exists, show clickable image -> YouTube link
+        if (v.thumb) {
+          const a = el("a", {
+            href: v.link,
+            target: "_blank",
+            rel: "noreferrer",
+            class: "video-thumb-link"
+          });
+
+          a.appendChild(el("img", {
+            src: v.thumb,
+            alt: v.title,
+            loading: "lazy",
+            class: "video-thumb-img"
+          }));
+
+          frame.appendChild(a);
+        } else {
+          // Fallback: embed iframe
+          frame.appendChild(el("iframe", {
+            src: v.url,
+            title: v.title,
+            allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
+            allowfullscreen: "true"
+          }));
+        }
+        box.appendChild(frame);
+        box.appendChild(el("div", {style:"padding:10px 12px;"}, [
+          el("a", {href:v.link, target:"_blank", rel:"noreferrer", class:"note"}, ["Open on YouTube ↗"])
+        ]));
+        grid.appendChild(box);
+      });
+
+      wrap.appendChild(grid);
+      return wrap;
+    }
+
+    function renderPage(it){
+      const wrap = el("div", {});
+      wrap.appendChild(el("p", {class:"kicker"}, [it.content?.kicker || ""]));
+      wrap.appendChild(el("h1", {}, [it.content?.h1 || ""]));
+      if(it.content?.lead) wrap.appendChild(el("p", {class:"lead"}, [it.content.lead]));
+
+      (it.content?.cards || []).forEach(c => wrap.appendChild(renderCardBlock(c)));
+
+      // ✅ 2-column cards (e.g., Education / Work)
+      if(it.content?.twoColCards?.length){
+        const row = el("div", {class:"two-col"});
+        it.content.twoColCards.forEach(c => row.appendChild(renderCardBlock(c)));
+        wrap.appendChild(row);
+      }
+
+      // ✅ 같은 페이지 안에 Photos 블록 합치기
+      if(it.photos) wrap.appendChild(renderPhotosBlock(it.photos));
+
+      // ✅ 같은 페이지 안에 Videos 블록 합치기
+      if(it.videos?.length) wrap.appendChild(renderVideosBlock(it.videos));
+
+      return wrap;
+    }
+
+    function renderPDF(){
+      const wrap = el("div", {});
+      wrap.appendChild(el("p", {class:"kicker"}, ["Resume"]));
+      wrap.appendChild(el("h1", {}, ["Resume (PDF)"]));
+      wrap.appendChild(el("p", {class:"lead"}, ["Embedded viewer. If it doesn’t load, use the sidebar link to open in a new tab."]));
+
+      const frameCard = el("div", {class:"card", style:"padding:0; overflow:hidden;"});
+      frameCard.appendChild(el("iframe", {src:"resume.pdf", title:"Resume PDF", class:"pdf-frame"}));
+      wrap.appendChild(frameCard);
+      return wrap;
+    }
+
+    function renderMaterial(it){
+      const m = it.material || {};
+      const wrap = el("div", {});
+      wrap.appendChild(el("p", {class:"kicker"}, [m.kicker || "Course Material"]));
+      wrap.appendChild(el("h1", {}, [m.h1 || it.label || "Course Material"]));
+      if(m.lead) wrap.appendChild(el("p", {class:"lead"}, [m.lead]));
+
+      const info = el("div", {class:"card"});
+      info.appendChild(el("div", {class:"meta"}, ["HIGHLIGHTS"]));
+      if(m.bullets?.length){
+        const ul = el("ul", {});
+        m.bullets.forEach(b => ul.appendChild(el("li", {html:b})));
+        info.appendChild(ul);
+      }
+      info.appendChild(el("div", {class:"btn-row"}, [
+        el("a", {class:"btn", href:m.src, target:"_blank", rel:"noreferrer"}, ["Open PDF ↗"]),
+        el("button", {class:"btn", type:"button"}, ["Back ←"])
+      ]));
+      info.querySelector("button").addEventListener("click", () => select(current.sectionId, "materials"));
+      wrap.appendChild(info);
+
+      const viewer = el("div", {class:"material-frame"});
+      viewer.appendChild(el("iframe", {src:m.src, title:(m.h1||"PDF")}));
+      wrap.appendChild(el("div", {class:"material-wrap"}, [viewer]));
+      return wrap;
+    }
+
+    function renderView(){
+      const cur = getCurrentItem();
+      if(!cur || !cur.it){ viewEl.innerHTML = "<p>Not found</p>"; return; }
+      const it = cur.it;
+
+      viewEl.innerHTML = "";
+      if(it.type === "page"){
+        viewEl.appendChild(renderPage(it));
+      } else if(it.type === "pdf"){
+        viewEl.appendChild(renderPDF());
+      } else if(it.type === "material"){
+        viewEl.appendChild(renderMaterial(it));
+      } else {
+        viewEl.innerHTML = "<p>Unsupported view</p>";
+      }
+    }
+
+    // Home click -> About
+    homeTitle.addEventListener("click", () => select("about","about"));
+
+    // Init
+    renderMenu();
+    select("about","about");
+  </script>
+</body>
+</html>
