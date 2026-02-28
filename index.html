@@ -1109,11 +1109,10 @@
               ]
             },
             photos: {
-              title: "Photos (to add)",
+              title: "Photos",
               folder: "herobot",
               images: [
-                // 내일 사진 올리면 여기 파일명만 추가하면 끝.
-                // 예: "herobot-1.jpg", "herobot-2.jpg"
+                "herobot_award.jpg"
               ],
               placeholder: true
             }
@@ -1138,31 +1137,31 @@
                   meta:"PROJECT 1 \u2014 FORECASTING",
                   h2:"Cash Sweep Balance Prediction",
                   lines:[
-                    "<b>Problem:</b> Cash sweep balance was treated as a flat assumption in forward KPI forecasts, limiting visibility into liquidity trends.",
+                    "<b>Problem:</b> Cash sweep balance was previously modelded as flat assumption; need to assess impact on balance growth",
                     "<b>Solution:</b> Designed and deployed a time-series regression model to forecast cash sweep balance as % of AUA, with assumption checks and holdout validation.",
                     "<b>Outcome & limitation:</b> Added 1\u2011month projections to executive KPI reporting to improve planning precision; longer horizons were intentionally constrained to preserve reliability."
                   ],
-                  pills:["Time Series", "Validation", "Uncertainty"]
+                  pills:["Time Series", "Validation", "Feature Importance"]
                 },
                 {
                   meta:"PROJECT 2 \u2014 DECISION SUPPORT",
-                  h2:"Successful WealthPlan Classification",
+                  h2:"Financial Plan Classification",
                   lines:[
                     "<b>Problem:</b> No quantitative framework existed to determine which completed WealthPlans translated into Net New Assets (NNA).",
                     "<b>Solution:</b> Built an interpretable tree-based classifier and used SHAP to provide transparent feature attribution for stakeholders.",
                     "<b>Outcome & limitation:</b> Delivered a deployable \u201cPlan Success Score\u201d to prioritize outreach; realized impact depended on advisor engagement with the insights."
                   ],
-                  pills:["Interpretability", "SHAP", "Adoption"]
+                  pills:["Classification", "SHAP", "Adoption"]
                 },
                 {
                   meta:"PROJECT 3 \u2014 CLIENT GROWTH",
                   h2:"Money-in-Motion Estimation",
                   lines:[
-                    "<b>Problem:</b> Advisors lacked a systematic way to quantify the likelihood of external asset inflows (held\u2011away assets).",
+                    "<b>Problem:</b> Estimate and quantify the likelihood of external asset inflows (held\u2011away assets).",
                     "<b>Solution:</b> Co-developed a supervised-learning scoring model with a vendor, combining life-event and engagement signals for Salesforce deployment.",
                     "<b>Outcome & limitation:</b> Enabled probability-based outreach prioritization and measurable inflow lift; adoption varied as some senior advisors favored relationship-driven intuition."
                   ],
-                  pills:["Scoring", "Salesforce", "Behavior"]
+                  pills:["Pipelines with vendor", "Salesforce", "Classification"]
                 },
                 {
                   meta:"PROJECT 4 \u2014 PERFORMANCE DRIVERS",
@@ -1172,7 +1171,7 @@
                     "<b>Solution:</b> Built an ML model using book composition and engagement features; used SHAP to separate structural drivers from short-term noise.",
                     "<b>Outcome & limitation:</b> Identified actionable predictors to inform leadership training; effectiveness varied by regional execution consistency."
                   ],
-                  pills:["Drivers", "SHAP", "Field Execution"]
+                  pills:["Feature Importance", "SHAP", "Field Execution"]
                 },
                 {
                   meta:"PROJECT 5 \u2014 MONITORING",
@@ -1202,7 +1201,7 @@
                     "<b>Solution:</b> Applied regression analysis to estimate relationships between consultation intensity and asset growth outcomes.",
                     "<b>Outcome & limitation:</b> Produced a first ROI estimate to support resource allocation; analysis is observational (non-experimental) by nature."
                   ],
-                  pills:["Regression", "Causal Limits", "ROI"]
+                  pills:["Regression", "Tableau", "ROI"]
                 },
                 {
                   meta:"PROJECT 8 \u2014 ADOPTION ANALYTICS",
@@ -1212,7 +1211,7 @@
                     "<b>Solution:</b> Built a firm-level adoption dataset and automated reporting pipeline to quantify penetration trends and usage metrics.",
                     "<b>Outcome & limitation:</b> Improved strategic account preparation for site visits; cadence constrained by upstream data refresh cycles."
                   ],
-                  pills:["Adoption", "Trends", "Automation"]
+                  pills:["Data Pipeline", "SQL", "Automation"]
                 }
               ],
             },
