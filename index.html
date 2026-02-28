@@ -348,6 +348,12 @@
     }
     .video-thumb-link { display:block; width:100%; height:100%; }
     .video-thumb-img { width:100%; height:100%; object-fit:cover; display:block; }
+    button,
+    input,
+    select,
+    textarea {
+      font-family: "Ubuntu Condensed", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    }
 </style>
 </head>
 
@@ -363,10 +369,7 @@
       <div class="nav-title">Sections</div>
       <div class="menu" id="menu"></div>
 
-      <div class="nav-title">Resume</div>
-      <div class="card" style="padding:12px; box-shadow:none; margin:0;">
-        <a href="resume.pdf" target="_blank" rel="noreferrer">Open resume.pdf ↗</a>
-      </div>
+
 
 
     </aside>
@@ -406,11 +409,11 @@
     const SITE = [
     {
         id: "about",
-        title: "About Me",
+        title: "ABOUT ME",
         items: [
           {
             id: "about",
-            label: "About Me",
+            label: "About ME",
             type: "page",
             content: {
               lead: "",
@@ -476,7 +479,7 @@
 
       {
         id: "academic",
-        title: "Academic",
+        title: "ACADEMIC",
         items: [
           {
             id: "top10",
@@ -995,7 +998,7 @@
 
       {
         id: "competitions",
-        title: "Competitions",
+        title: "COMPETITIONS",
         items: [
           {
             id: "minnemudac",
@@ -1122,7 +1125,7 @@
 
       {
         id: "work",
-        title: "Projects",
+        title: "PROJECTS",
         items: [
           {
             id: "rbc",
@@ -1231,7 +1234,7 @@
 
       {
         id: "experience",
-        title: "Experience",
+        title: "EXPERIENCE",
         items: [
           {
             id: "twins",
@@ -1351,7 +1354,7 @@
 
       {
         id: "resume",
-        title: "Resume",
+        title: "RESUME",
         items: [
           { id:"pdf", label:"View PDF", type:"pdf" }
         ]
@@ -1399,6 +1402,23 @@
     function renderMenu(){
       menuEl.innerHTML = "";
       SITE.forEach(sec => {
+        if (sec.id === "about") {
+          const single = el("button", {
+            class: "menu-btn",
+            type: "button"
+          }, [
+            el("div", {class:"left"}, [
+              el("div", {}, [sec.title])
+            ])
+          ]);
+
+          single.addEventListener("click", () => {
+            select("about", "about");
+          });
+
+          menuEl.appendChild(single);
+          return; // About은 여기서 종료
+        }
         const item = el("div", {class:"menu-item", "data-sec":sec.id});
         const btn = el("button", {class:"menu-btn", type:"button"}, [
           el("div", {class:"left"}, [
